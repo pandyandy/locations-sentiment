@@ -38,10 +38,10 @@ icons=['pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
 
 menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orientation="horizontal")
 
-locations_data = read_data(st.secrets['locations_path'])
+locations_data = pd.read_csv(st.secrets['locations_path'])
 reviews_data = read_data(st.secrets['reviews_path'])
-attributes = read_data(st.secrets['attributes_path'])
-bot_data = read_data(st.secrets['bot_path'])
+attributes = pd.read_csv(st.secrets['attributes_path'])
+bot_data = pd.read_csv(st.secrets['bot_path'])
 
 pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
 attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
