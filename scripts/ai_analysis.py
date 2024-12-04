@@ -150,7 +150,8 @@ def ai_analysis(data, attributes):
         st.stop()
 
     columns = ['REVIEW_DATE', 'REVIEW_TEXT', 'RATING', 'SENTIMENT',  'CATEGORY', 'ADDRESS', 'REVIEWER_NAME', 'REVIEW_URL']
-    st.dataframe(data[columns].style.map(sentiment_color, subset=["SENTIMENT"]),
+    st.dataframe(data[columns],
+                #.style.map(sentiment_color, subset=["SENTIMENT"]),
                 column_config={
                     'REVIEW_DATE': 'Date',
                     'RATING': 'Rating',
