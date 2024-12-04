@@ -37,7 +37,7 @@ def assistant(file_id, assistant_id, bot_data):
                     "content": (
                         "To help you navigate the CSV file, here is the description of some important columns: "
                         "REVIEW_ID: Unique identifier for the feedback. "
-                        "FEEDBACK_CHANNEL: Source channel of the feedback (e.g., platform or app). "
+                        "REVIEW_ORIGIN: Source channel of the feedback (e.g., platform or app). "
                         "PLACE_ID: Unique identifier for the place being reviewed. "
                         "PLACE_TOTAL_SCORE: The total score of the place based on reviews. "
                         "PLACE_REVIEWS_COUNT: Number of reviews for the place. "
@@ -49,7 +49,7 @@ def assistant(file_id, assistant_id, bot_data):
                         "REVIEW_CONTEXT_SERVICE: Type of service mentioned. "
                         "REVIEW_DETAILED_FOOD/SERVICE/ATMOSPHERE: Specific ratings for food, service, and atmosphere. "  
                         "REVIEW_TEXT: Text content of the review. "
-                        "OVERALL_SENTIMENT: Sentiment analysis result for the feedback (e.g., positive, negative). "
+                        "SENTIMENT: Sentiment analysis result for the feedback (e.g., positive, negative). "
                         "CITY/STATE/POSTAL_CODE: Location details of the place."
                     ),
                     "attachments": [
