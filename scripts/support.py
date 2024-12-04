@@ -73,7 +73,7 @@ def support(data, reviews_data):
         review_text = selected_review['REVIEW_TEXT']
         author_name = selected_review['REVIEWER_NAME']
         prompt = f"""
-Below is a restaurant review. Pretend you're the restaurant's social media manager and craft a concise (max 5 sentences), professional response. Where appropriate, acknowledge specific details from the review to personalize your reply. Start with a greeting, focus on addressing customer's feedback, and offering any necessary follow-up. Don't include any other text or comments. Return only the response.
+Pretend you're Vodafone's social media manager and craft a concise (max 5 sentences), professional response to a review you're given. Where appropriate, acknowledge specific details from the review to personalize your reply. Start with a greeting, focus on addressing customer's feedback, and offering any necessary follow-up. Don't include any other text or comments. Return only the response.
 
 Review:
 {review_text}
