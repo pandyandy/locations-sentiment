@@ -63,14 +63,14 @@ def assistant(file_id, assistant_id, bot_data):
         )
         st.session_state.thread_id = thread.id
 
-    if not st.session_state.table_written:
-        df_log = pd.DataFrame({
-            'thread_id': [st.session_state.thread_id],
-            'created_at': [datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
-        })
-
-        write_table(table_id='in.c-bot.logging', df=df_log, is_incremental=True)
-        st.session_state.table_written = True
+    #if not st.session_state.table_written:
+    #    df_log = pd.DataFrame({
+    #        'thread_id': [st.session_state.thread_id],
+   #         'created_at': [datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
+    #    })
+#
+#        write_table(table_id='in.c-bot.logging', df=df_log, is_incremental=True)
+#        st.session_state.table_written = True
 
     with st.expander("Data"):
         st.dataframe(bot_data, hide_index=True)

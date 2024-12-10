@@ -158,7 +158,7 @@ Please provide an updated response incorporating the additional instruction.
                         ]
                         
                         update_df = reviews_data[reviews_data['REVIEW_ID'] == review_id].copy()
-                        write_table('out.c-llm-analysis-data-cleaning.REVIEWS', update_df, is_incremental=True)
+                        write_table(st.secrets['reviews_path'], update_df, is_incremental=True)
                         st.success('Response saved successfully!')
                     except Exception as e:
                         st.error(f'Failed to save response: {str(e)}')
