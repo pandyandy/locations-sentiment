@@ -24,7 +24,7 @@ LOGO_URL=st.secrets['LOGO_URL']
 # Initialize session state variables
 session_defaults = {
     "thread_id": None,
-    "messages": [{'role': 'assistant', 'content': 'Welcome! How can I assist you today?'}],
+    "messages": [{'role': 'assistant', 'content': 'Hi! How can I help you? Ask me anything about your data.'}],
     "new_prompt": None,
     "instruction": '',
     "regenerate_clicked": False,
@@ -45,7 +45,7 @@ def example():
         emoji="🎄🎁🎅🏻",
         font_size=44,
         falling_speed=5,
-        animation_length="5 seconds",
+        animation_length="3 seconds",
     )
 
 example()
@@ -92,13 +92,13 @@ review_count_total = len(merged_data)
 avg_rating_total = merged_data['RATING'].mean().round(2)
 
 # State Selection
-state_options = sorted(locations_data['COUNTRY_CODE'].unique().tolist())
-state = st.sidebar.multiselect('Select a state', state_options, state_options[0], placeholder='All')
-if len(state) > 0:
-    selected_state = state
-else:
-    selected_state = state_options
-locations_data = locations_data[locations_data['COUNTRY_CODE'].isin(selected_state)]
+#state_options = sorted(locations_data['COUNTRY_CODE'].unique().tolist())
+#state = st.sidebar.multiselect('Select a state', state_options, state_options[0], placeholder='All')
+#if len(state) > 0:
+#    selected_state = state
+#else:
+#    selected_state = state_options
+#locations_data = locations_data[locations_data['COUNTRY_CODE'].isin(selected_state)]
 
 # City Selection
 city_options = sorted(locations_data['CITY'].unique().tolist())
@@ -108,7 +108,7 @@ if len(city) > 0:
     location_options = sorted(locations_data[locations_data['CITY'].isin(selected_city)]['ADDRESS'].unique().tolist())
 else:
     selected_city = city_options
-    location_options = sorted(locations_data[locations_data['COUNTRY_CODE'].isin(selected_state)]['ADDRESS'].unique().tolist())
+    location_options = sorted(locations_data[locations_data['CITY'].isin(selected_city)]['ADDRESS'].unique().tolist())
 locations_data = locations_data[locations_data['CITY'].isin(selected_city)]
 
 # Location Selection

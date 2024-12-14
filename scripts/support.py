@@ -16,7 +16,7 @@ def sentiment_color(val):
 
 def support(data, reviews_data):
     st.markdown("<br>", unsafe_allow_html=True)
-    filtered_review_data_detailed = data[data['REVIEW_TEXT'].notna()].sort_values('REVIEW_DATE', ascending=False)
+    filtered_review_data_detailed = data.sort_values('REVIEW_DATE', ascending=False)
     if filtered_review_data_detailed.empty:
         st.info('No reviews with feedback text available for the selected filters.', icon=':material/info:')
         st.stop()
