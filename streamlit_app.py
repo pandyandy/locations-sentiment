@@ -13,6 +13,8 @@ from scripts.openai import assistant
 from scripts.sapi import read_data
 from scripts.viz import metrics
 
+from streamlit_extras.let_it_rain import rain
+
 st.set_page_config(layout="wide")
 
 ASSISTANT_ID=st.secrets['ASSISTANT_ID']
@@ -23,7 +25,6 @@ LOGO_URL=st.secrets['LOGO_URL']
 session_defaults = {
     "thread_id": None,
     "messages": [{'role': 'assistant', 'content': 'Welcome! How can I assist you today?'}],
-    "table_written": False,
     "new_prompt": None,
     "instruction": '',
     "regenerate_clicked": False,
@@ -38,17 +39,29 @@ icons=['pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
 
 menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orientation="horizontal")
 
+
+def example():
+    rain(
+        emoji="🎄🎁🎅🏻",
+        font_size=44,
+        falling_speed=5,
+        animation_length="5 seconds",
+    )
+
+example()
 locations_data = pd.read_csv(st.secrets['locations_path'])
 reviews_data = read_data(st.secrets['reviews_path'])
 attributes = pd.read_csv(st.secrets['attributes_path'])
-bot_data = pd.read_csv(st.secrets['bot_path'])
+#bot_data = pd.read_csv(st.secrets['bot_path'])
+
 
 pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
 attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
 attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_index()
-attributes = attributes[attributes['COUNT'] > 20]
+attributes = attributes[attributes['COUNT'] > 1]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
+
 
 ## LOGO
 st.sidebar.markdown(
@@ -183,4 +196,4 @@ if menu_id == 'Support':
     support(filtered_locations_with_reviews, reviews_data)
 
 if menu_id == 'Assistant':
-    assistant(file_id=st.secrets['FILE_ID'], assistant_id=st.secrets['ASSISTANT_ID'], bot_data=bot_data)
+    assistant(file_id=st.secrets['FILE_ID'], assistant_id=st.secrets['ASSISTANT_ID']) #, bot_data=bot_data)

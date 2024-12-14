@@ -179,10 +179,11 @@ def ai_analysis(data, attributes):
     st.markdown("##### Keywords")
     # Import the WordCloud class
     keywords_text = " ".join(data['KEYWORDS'].dropna().astype(str).values).replace("'", "")
-    wordcloud = WordCloud(width=2500, height=500, background_color='white', colormap='CMRmap_r').generate(keywords_text)
-    # Create new figure and axis
-    fig, ax = plt.subplots(figsize=(10, 10))
-    ax.imshow(wordcloud, interpolation='bilinear')
-    ax.axis("off")
-    
-    st.pyplot(fig)
+    if keywords_text:  # Skip if there are no words in keywords_text
+        wordcloud = WordCloud(width=2500, height=500, background_color='white', colormap='CMRmap_r').generate(keywords_text)
+        # Create new figure and axis
+        fig, ax = plt.subplots(figsize=(10, 10))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.axis("off")
+        
+        st.pyplot(fig)
