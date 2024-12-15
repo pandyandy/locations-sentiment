@@ -75,14 +75,14 @@ st.sidebar.markdown(
 
 ## FILTERS
 # Category Selection
-category_options = locations_data['CATEGORY'].unique().tolist()
-category = st.sidebar.multiselect('Select a category', category_options, placeholder='All')
-if len(category) > 0:
-    selected_category = category
-else:
-    selected_category = category_options
+#category_options = locations_data['CATEGORY'].unique().tolist()
+#category = st.sidebar.multiselect('Select a category', category_options, placeholder='All')
+#if len(category) > 0:
+#    selected_category = category
+#else:
+#    selected_category = category_options
 
-locations_data = locations_data[locations_data['CATEGORY'].isin(selected_category)]
+#locations_data = locations_data[locations_data['CATEGORY'].isin(selected_category)]
 location_count_total = len(locations_data)
 data_collected_at = locations_data['DATA_COLLECTED_AT'].max()
 

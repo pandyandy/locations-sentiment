@@ -149,7 +149,7 @@ def ai_analysis(data, attributes):
         st.info("No reviews available for the selected filters.", icon=':material/info:')
         st.stop()
 
-    columns = ['REVIEW_DATE', 'REVIEW_TEXT', 'RATING', 'SENTIMENT',  'CATEGORY', 'ADDRESS', 'REVIEWER_NAME', 'REVIEW_URL']
+    columns = ['REVIEW_DATE', 'REVIEW_TEXT', 'RATING', 'SENTIMENT', 'ADDRESS', 'REVIEWER_NAME', 'REVIEW_URL'] #'CATEGORY',
     st.dataframe(data[columns],
                 #.style.map(sentiment_color, subset=["SENTIMENT"]),
                 column_config={
@@ -162,9 +162,9 @@ def ai_analysis(data, attributes):
                     'ADDRESS': st.column_config.Column(
                         'Location',
                         width="small"),
-                    'CATEGORY': st.column_config.Column(
-                        'Category',
-                        width="medium"),
+                   # 'CATEGORY': st.column_config.Column(
+                    #    'Category',
+                     #   width="medium"),
                     'REVIEWER_NAME': 'Author',
                     'REVIEW_URL': st.column_config.LinkColumn(
                         '🔗',
