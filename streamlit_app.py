@@ -36,7 +36,7 @@ for key, value in session_defaults.items():
         st.session_state[key] = value
 
 options = ['About', 'Locations', 'Overview', 'AI Analysis', 'Support', 'Assistant']
-icons=['info-circle-fill', 'pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
+icons=['info-circle', 'pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
 
 menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orientation="horizontal")
 
@@ -142,8 +142,8 @@ else:
 filtered_reviews = filtered_reviews[filtered_reviews['RATING'].isin(selected_rating)]
 
 # Date Selection
-date_options = ['Last Week', 'Last Month', 'Last 3 Months', 'All Time', 'Other']
-date_selection = st.sidebar.selectbox('Select a date', date_options, index=None, placeholder='All')
+date_options = ['All Time Collected','Last Week', 'Last Month', 'Other']
+date_selection = st.sidebar.selectbox('Select a date', date_options, index=0, placeholder='All')
 min_date = pd.to_datetime(filtered_reviews['REVIEW_DATE'].min())
 max_date = pd.to_datetime(filtered_reviews['REVIEW_DATE'].max())
 
@@ -160,9 +160,7 @@ else:
         start_date = end_date - pd.DateOffset(weeks=1)
     elif date_selection == 'Last Month':
         start_date = end_date - pd.DateOffset(months=1)
-    elif date_selection == 'Last 3 Months':
-        start_date = end_date - pd.DateOffset(months=3)
-    elif date_selection == 'All Time':
+    elif date_selection == 'All Time Collected':
         start_date = min_date
 
 selected_date_range = (start_date, end_date)
