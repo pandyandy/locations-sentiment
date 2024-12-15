@@ -53,7 +53,7 @@ example()
 locations_data = pd.read_csv(st.secrets['locations_path'])
 reviews_data = read_data(st.secrets['reviews_path'])
 attributes = pd.read_csv(st.secrets['attributes_path'])
-#bot_data = pd.read_csv(st.secrets['bot_path'])
+bot_data = pd.read_csv(st.secrets['bot_path'])
 
 
 pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
@@ -195,4 +195,4 @@ if menu_id == 'Support':
     support(filtered_locations_with_reviews, reviews_data)
 
 if menu_id == 'Assistant':
-    assistant(file_id=st.secrets['FILE_ID'], assistant_id=st.secrets['ASSISTANT_ID']) #, bot_data=bot_data)
+    assistant(file_id=st.secrets['FILE_ID'], assistant_id=st.secrets['ASSISTANT_ID'], bot_data=bot_data)
