@@ -45,7 +45,7 @@ def example():
     rain(
         emoji="❄️",
         font_size=44,
-        falling_speed=3,
+        falling_speed=5,
         animation_length="3 seconds",
     )
 
