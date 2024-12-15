@@ -94,9 +94,9 @@ def overview(data):
                 width="medium",
             ),
             "RATING": st.column_config.LineChartColumn(
-                "Review Rating per Date",
+                "Rating over Time",
                 width="large",
-                help="The rating during the selected date range",
+                help="The rating of collected reviews for the location over time",
                 y_min=1,
                 y_max=5,
             ),
