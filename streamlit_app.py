@@ -62,7 +62,7 @@ attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_in
 attributes = attributes[attributes['COUNT'] > 1]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
-
+locations_data['ADDRESS'] = locations_data['ADDRESS'].str.replace(", Česko", "", regex=False)
 
 ## LOGO
 st.sidebar.markdown(
