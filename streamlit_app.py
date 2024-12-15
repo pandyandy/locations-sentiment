@@ -43,10 +43,10 @@ menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orienta
 
 def example():
     rain(
-        emoji="🎄🎁🎅🏻",
+        emoji="❄️",
         font_size=44,
         falling_speed=3,
-        animation_length=3,
+        animation_length="3 seconds",
     )
 
 example()
