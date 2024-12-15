@@ -73,12 +73,12 @@ def support(data, reviews_data):
         review_text = selected_review['REVIEW_TEXT']
         author_name = selected_review['REVIEWER_NAME']
         prompt = f"""
-Pretend you're Vodafone's social media manager and craft a concise (max 5 sentences), professional response to a review you're given. Where appropriate, acknowledge specific details from the review to personalize your reply. Start with a greeting, focus on addressing customer's feedback, and offering any necessary follow-up. Don't include any other text or comments. Return only the response.
+Jsi manažer sociálních sítí Komerční banky. Vytvoř stručnou (3-5 vět), profesionální odpověď na recenzi níže. Kde je to vhodné, uznej konkrétní detaily z recenze, aby odpověď byla personalizovaná. Začni pozdravem, zaměř se na řešení zpětné vazby a nabídni následné kroky. Nezahrnuj žádný jiný text nebo komentáře. Vrať pouze odpověď.
 
-Review:
+Recenze:
 {review_text}
 
-Author: {author_name}
+Autor: {author_name}
 """
         col8, col9 = st.columns(2, gap='medium', vertical_alignment='top')
         with col8:
@@ -119,14 +119,14 @@ Author: {author_name}
                         st.session_state.instruction = instruction
                         with st.spinner(':robot_face: Regenerating response, please wait...'):
                             new_prompt = f"""
-Original task:
+Původní úkol:
 {prompt}
 
-Previous response: {st.session_state['generated_responses'][review_text]}
+Předchozí odpověď: {st.session_state['generated_responses'][review_text]}
 
-Additional instruction: {instruction}
+Další instrukce: {instruction}
 
-Please provide an updated response incorporating the additional instruction.
+Prosím, aktualizuj odpověď.
 """
                             response = generate_response(new_prompt)
                             if response:
