@@ -35,8 +35,8 @@ for key, value in session_defaults.items():
     if key not in st.session_state:
         st.session_state[key] = value
 
-options = ['About', 'Locations', 'Overview', 'AI Analysis', 'Support', 'Assistant']
-icons=['info-circle', 'pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
+options = ['Locations', 'Overview', 'AI Analysis', 'Support', 'Assistant'] #'About', 
+icons=['pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot'] #'info-circle', 
 
 menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orientation="horizontal")
 
@@ -45,8 +45,8 @@ def example():
     rain(
         emoji="🎄🎁🎅🏻",
         font_size=44,
-        falling_speed=5,
-        animation_length="3 seconds",
+        falling_speed=3,
+        animation_length=3,
     )
 
 example()
@@ -176,8 +176,8 @@ st.sidebar.divider()
 st.sidebar.caption(f"**Data last updated on:** {data_collected_at}.")
 
 ## TABS
-if menu_id == 'About':
-    about()
+#if menu_id == 'About':
+#    about()
 
 if menu_id == 'Locations':    
     metrics(location_count_total, review_count_total, avg_rating_total, filtered_locations_with_reviews)
