@@ -147,10 +147,7 @@ date_selection = st.sidebar.selectbox('Select a date', date_options, index=0, pl
 min_date = pd.to_datetime(filtered_reviews['REVIEW_DATE'].min())
 max_date = pd.to_datetime(filtered_reviews['REVIEW_DATE'].max())
 
-if date_selection is None:
-    start_date = min_date
-    end_date = max_date
-elif date_selection == 'Other':
+if date_selection == 'Other':
     start_date, end_date = st.sidebar.slider('Select date range', value=[min_date.date(), max_date.date()], min_value=min_date.date(), max_value=max_date.date(), key='date_input')
     start_date = pd.to_datetime(start_date)
     end_date = pd.to_datetime(end_date).replace(hour=23, minute=59)
