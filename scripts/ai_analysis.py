@@ -150,8 +150,7 @@ def ai_analysis(data, attributes):
         st.stop()
 
     columns = ['REVIEW_DATE', 'REVIEW_TEXT', 'RATING', 'SENTIMENT', 'ADDRESS', 'REVIEWER_NAME', 'REVIEW_URL'] #'CATEGORY',
-    st.dataframe(data[columns],
-                #.style.map(sentiment_color, subset=["SENTIMENT"]),
+    st.dataframe(data[columns].style.map(sentiment_color, subset=["SENTIMENT"]),
                 column_config={
                     'REVIEW_DATE': 'Date',
                     'RATING': 'Rating',
@@ -162,9 +161,9 @@ def ai_analysis(data, attributes):
                     'ADDRESS': st.column_config.Column(
                         'Location',
                         width="small"),
-                   # 'CATEGORY': st.column_config.Column(
+                    #'CATEGORY': st.column_config.Column(
                     #    'Category',
-                     #   width="medium"),
+                    #    width="medium"),
                     'REVIEWER_NAME': 'Author',
                     'REVIEW_URL': st.column_config.LinkColumn(
                         '🔗',

@@ -25,8 +25,7 @@ def support(data, reviews_data):
     data['CUSTOMER_SUCCESS_NOTES'] = data['CUSTOMER_SUCCESS_NOTES'].fillna('')
     df_to_edit = st.data_editor(
         data[['SELECT', 'REVIEW_ID','REVIEWER_NAME', 'SENTIMENT', 'REVIEW_TEXT', 'RATING', 'ADDRESS',
-                                    'REVIEW_DATE', 'CUSTOMER_SUCCESS_NOTES', 'REVIEW_URL', 'STATUS', 'RESPONSE']],
-                                    #.style.map(sentiment_color, subset=["OVERALL_SENTIMENT"]),
+                                    'REVIEW_DATE', 'CUSTOMER_SUCCESS_NOTES', 'REVIEW_URL', 'STATUS', 'RESPONSE']].style.map(sentiment_color, subset=["SENTIMENT"]),
         column_order=('SELECT', 'REVIEW_DATE', 'REVIEWER_NAME', 'RATING', 'REVIEW_TEXT', 'SENTIMENT', 'STATUS', 'ADDRESS', 'REVIEW_URL', 'RESPONSE', 'CUSTOMER_SUCCESS_NOTES'), 
         column_config={
             'SELECT': 'Select',
