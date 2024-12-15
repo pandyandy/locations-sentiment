@@ -35,22 +35,23 @@ def assistant(file_id, assistant_id, bot_data):
                 {
                     "role": "user",
                     "content": (
-                        "To help you navigate the CSV file, here is the description of some important columns: "
-                        "REVIEW_ID: Unique identifier for the feedback. "
-                        "REVIEW_ORIGIN: Source channel of the feedback (e.g., platform or app). "
+                        "To help you navigate the CSV file, here is the description of the columns: "
+                        "REVIEW_ID: Unique identifier for the reivew. "
                         "PLACE_ID: Unique identifier for the place being reviewed. "
+                        "REVIEWER_NAME: Name of the customer. "
+                        "REVIEW_DATE: Date when the review was given. " 
+                        "RATING: The rating given by the reviewer (on a scale from 1 to 5). "
+                        "REVIEW_TEXT: Text content of the review. "
+                        "REVIEW_URL: URL of the review. "
+                        "REVIEW_ORIGIN: Source channel of the feedback (e.g., platform or app). "
+                        "SENTIMENT: Sentiment analysis result for the feedback (e.g., positive, negative). "
+                        "CATEGORY: Category of the place. "
+                        "ADDRESS/STREET/CITY/POSTAL_CODE/COUNTRY_CODE: Location details of the place."
                         "PLACE_TOTAL_SCORE: The total score of the place based on reviews. "
                         "PLACE_REVIEWS_COUNT: Number of reviews for the place. "
                         "LATITUDE/LONGITUDE: Geographical coordinates of the place. "   
-                        "REVIEWER_NAME: Name of the customer. "
-                        "REVIEW_DATE: Date when the feedback was given. " 
-                        "RATING: The rating given by the reviewer (on a scale). "
-                        "REVIEW_CONTEXT_MEAL_TYPE: Type of meal mentioned in the review. "
-                        "REVIEW_CONTEXT_SERVICE: Type of service mentioned. "
-                        "REVIEW_DETAILED_FOOD/SERVICE/ATMOSPHERE: Specific ratings for food, service, and atmosphere. "  
-                        "REVIEW_TEXT: Text content of the review. "
-                        "SENTIMENT: Sentiment analysis result for the feedback (e.g., positive, negative). "
-                        "CITY/STATE/POSTAL_CODE: Location details of the place."
+                        "PLACE_URL: URL of the place. "
+                        "TITLE: Title of the place. "
                     ),
                     "attachments": [
                         {
