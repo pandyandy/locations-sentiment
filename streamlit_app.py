@@ -167,11 +167,11 @@ else:
 
 selected_date_range = (start_date, end_date)
 
-# Convert REVIEW_DATE to datetime for comparison
-filtered_reviews['REVIEW_DATE'] = pd.to_datetime(filtered_reviews['REVIEW_DATE'])
-filtered_reviews = filtered_reviews[filtered_reviews['REVIEW_DATE'].between(selected_date_range[0], selected_date_range[1])]
+# Convert REVIEW_DATE to datetime for comparison and filter reviews by date range
+filtered_reviews = filtered_reviews[pd.to_datetime(filtered_reviews['REVIEW_DATE']).between(selected_date_range[0], selected_date_range[1])]
 
-filtered_locations_with_reviews = filtered_reviews.merge(locations_data, on='PLACE_ID', how='inner')
+# Merge filtered reviews with locations data and sort by REVIEW_DATE
+filtered_locations_with_reviews = filtered_reviews.merge(locations_data, on='PLACE_ID', how='inner').sort_values('REVIEW_DATE', ascending=False)
 
 if filtered_locations_with_reviews.empty:
     st.info('No data available for the selected filters.', icon=':material/info:')

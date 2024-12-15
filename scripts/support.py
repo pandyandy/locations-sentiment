@@ -16,15 +16,15 @@ def sentiment_color(val):
 
 def support(data, reviews_data):
     st.markdown("<br>", unsafe_allow_html=True)
-    filtered_review_data_detailed = data.sort_values('REVIEW_DATE', ascending=False)
-    if filtered_review_data_detailed.empty:
+    
+    if data.empty:
         st.info('No reviews with feedback text available for the selected filters.', icon=':material/info:')
         st.stop()
-    filtered_review_data_detailed['SELECT'] = [True] + [False] * (len(filtered_review_data_detailed) - 1)
+    data['SELECT'] = [True] + [False] * (len(data) - 1)
     #filtered_review_data_detailed['RATING'] = filtered_review_data_detailed['RATING'].astype(int)
-    filtered_review_data_detailed['CUSTOMER_SUCCESS_NOTES'] = filtered_review_data_detailed['CUSTOMER_SUCCESS_NOTES'].fillna('')
+    data['CUSTOMER_SUCCESS_NOTES'] = data['CUSTOMER_SUCCESS_NOTES'].fillna('')
     df_to_edit = st.data_editor(
-        filtered_review_data_detailed[['SELECT', 'REVIEW_ID','REVIEWER_NAME', 'SENTIMENT', 'REVIEW_TEXT', 'RATING', 'ADDRESS',
+        data[['SELECT', 'REVIEW_ID','REVIEWER_NAME', 'SENTIMENT', 'REVIEW_TEXT', 'RATING', 'ADDRESS',
                                     'REVIEW_DATE', 'CUSTOMER_SUCCESS_NOTES', 'REVIEW_URL', 'STATUS', 'RESPONSE']],
                                     #.style.map(sentiment_color, subset=["OVERALL_SENTIMENT"]),
         column_order=('SELECT', 'REVIEW_DATE', 'REVIEWER_NAME', 'RATING', 'REVIEW_TEXT', 'SENTIMENT', 'STATUS', 'ADDRESS', 'REVIEW_URL', 'RESPONSE', 'CUSTOMER_SUCCESS_NOTES'), 
@@ -137,8 +137,8 @@ Please provide an updated response incorporating the additional instruction.
         
                 if col3.button('💾 Save response', use_container_width=True):
                     review_id = selected_review['REVIEW_ID']
-                    filtered_review_data_detailed['RESPONSE'] = filtered_review_data_detailed['RESPONSE'].astype('object')
-                    filtered_review_data_detailed.loc[filtered_review_data_detailed['REVIEW_ID'] == review_id, 'RESPONSE'] = edited_response
+                    data['RESPONSE'] = data['RESPONSE'].astype('object')
+                    data.loc[data['REVIEW_ID'] == review_id, 'RESPONSE'] = edited_response
                     
                     try:
                         update_df = pd.DataFrame({
