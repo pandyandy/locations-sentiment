@@ -59,7 +59,7 @@ bot_data = pd.read_csv(st.secrets['bot_path'])
 pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
 attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
 attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_index()
-attributes = attributes[attributes['COUNT'] > 1]
+attributes = attributes[attributes['COUNT'] > 2]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
 locations_data['ADDRESS'] = locations_data['ADDRESS'].str.replace(", Česko", "", regex=False)
