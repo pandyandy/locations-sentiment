@@ -4,6 +4,7 @@ import pandas as pd
 
 from streamlit_option_menu import option_menu
 
+from scripts.about import about
 from scripts.locations import locations
 from scripts.overview import overview
 from scripts.ai_analysis import ai_analysis
@@ -34,8 +35,8 @@ for key, value in session_defaults.items():
     if key not in st.session_state:
         st.session_state[key] = value
 
-options = ['Locations', 'Overview', 'AI Analysis', 'Support', 'Assistant']
-icons=['pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
+options = ['About', 'Locations', 'Overview', 'AI Analysis', 'Support', 'Assistant']
+icons=['info-circle-fill', 'pin-map-fill', 'people', 'file-bar-graph', 'chat-heart', 'robot']
 
 menu_id = option_menu(None, options=options, icons=icons, key='menu_id', orientation="horizontal")
 
@@ -180,6 +181,9 @@ st.sidebar.divider()
 st.sidebar.caption(f"**Data last updated on:** {data_collected_at}.")
 
 ## TABS
+if menu_id == 'About':
+    about()
+
 if menu_id == 'Locations':    
     metrics(location_count_total, review_count_total, avg_rating_total, filtered_locations_with_reviews)
     locations(filtered_locations_with_reviews)
