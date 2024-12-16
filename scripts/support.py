@@ -72,7 +72,7 @@ def support(data, reviews_data):
         review_text = selected_review['REVIEW_TEXT']
         author_name = selected_review['REVIEWER_NAME']
         prompt = f"""
-Jsi manažer sociálních sítí Kooperativa. Vytvoř stručnou (3-5 vět), profesionální odpověď na recenzi níže. Kde je to vhodné, uznej konkrétní detaily z recenze, aby odpověď byla personalizovaná. Začni pozdravem, zaměř se na řešení zpětné vazby a nabídni následné kroky. Nezahrnuj žádný jiný text nebo komentáře. Vrať pouze odpověď.
+Jsi manažer sociálních sítí. Vytvoř stručnou (3-5 vět), profesionální odpověď na recenzi níže. Začni pozdravem, zaměř se na řešení zpětné vazby a nabídni následné kroky. Nezahrnuj žádný jiný text nebo komentáře. Vrať pouze odpověď.
 
 Recenze:
 {review_text}
