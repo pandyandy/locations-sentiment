@@ -95,7 +95,7 @@ def position_attribute_nodes(G, entity_positions, scale_factor=0.8):
 def draw_network(G, pos, top_entities):
     attr_nodes = [n for n in G.nodes() if n not in top_entities]
     nx.draw_networkx_nodes(G, pos, nodelist=top_entities, node_color='#e6f2ff', node_size=2500)
-    nx.draw_networkx_nodes(G, pos, nodelist=attr_nodes, node_color='#F2F2F2', node_size=1000, alpha=0.7)
+    nx.draw_networkx_nodes(G, pos, nodelist=attr_nodes, node_color='#F2F2F2', node_size=1000, alpha=0.8)
     
     colors = plt.cm.rainbow(np.linspace(0, 1, len(top_entities)))
     for i, entity in enumerate(top_entities):
