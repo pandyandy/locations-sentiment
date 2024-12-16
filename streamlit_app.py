@@ -102,17 +102,17 @@ avg_rating_total = merged_data['RATING'].mean().round(2)
 #locations_data = locations_data[locations_data['COUNTRY_CODE'].isin(selected_state)]
 
 # City Selection
-city_options = sorted(locations_data['CITY'].unique().tolist())
-city = st.sidebar.multiselect('Select a city', city_options, placeholder='All')
-if len(city) > 0:
-    selected_city = city
-    location_options = sorted(locations_data[locations_data['CITY'].isin(selected_city)]['ADDRESS'].unique().tolist())
-else:
-    selected_city = city_options
-    location_options = sorted(locations_data[locations_data['CITY'].isin(selected_city)]['ADDRESS'].unique().tolist())
-locations_data = locations_data[locations_data['CITY'].isin(selected_city)]
+#city_options = sorted(locations_data['CITY'].unique().tolist())
+#city = st.sidebar.multiselect('Select a city', city_options, placeholder='All')
+#if len(city) > 0:#
+#    selected_city = city
+#else:
+#    selected_city = city_options
+#    location_options = sorted(locations_data[locations_data['CITY'].isin(selected_city)]['ADDRESS'].unique().tolist())
+#locations_data = locations_data[locations_data['CITY'].isin(selected_city)]
 
 # Location Selection
+location_options = sorted(locations_data['ADDRESS'].unique().tolist())
 location = st.sidebar.multiselect('Select a location', location_options, placeholder='All')
 if len(location) > 0:
     selected_location = location
