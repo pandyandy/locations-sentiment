@@ -139,7 +139,8 @@ def ai_analysis(data, attributes):
 
     ## ENTITY-ATTRIBUTE RELATIONS
     st.divider()
-    display_network_graph(attributes)
+    if attributes:
+        display_network_graph(attributes)
 
 
     ## REVIEW DETAILS

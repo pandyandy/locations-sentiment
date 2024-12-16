@@ -58,8 +58,6 @@ bot_data = pd.read_csv(st.secrets['bot_path'])
 
 pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
 attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
-attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_index()
-attributes = attributes[attributes['COUNT'] > 1]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
 locations_data['ADDRESS'] = locations_data['ADDRESS'].str.replace(", Česko", "", regex=False)
@@ -167,6 +165,11 @@ filtered_reviews = filtered_reviews[pd.to_datetime(filtered_reviews['REVIEW_DATE
 
 # Merge filtered reviews with locations data and sort by REVIEW_DATE
 filtered_locations_with_reviews = filtered_reviews.merge(locations_data, on='PLACE_ID', how='inner').sort_values('REVIEW_DATE', ascending=False)
+
+filtered_reviews_ids = filtered_locations_with_reviews['REVIEW_ID'].unique()
+attributes = attributes[attributes['REVIEW_ID'].isin(filtered_reviews_ids)]
+attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_index()
+attributes = attributes[attributes['COUNT'] > 1]
 
 if filtered_locations_with_reviews.empty:
     st.info('No data available for the selected filters.', icon=':material/info:')
