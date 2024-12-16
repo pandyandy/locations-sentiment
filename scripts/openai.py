@@ -41,7 +41,7 @@ def assistant(file_id, assistant_id, bot_data):
                         "REVIEWER_NAME: Name of the customer. "
                         "REVIEW_DATE: Date when the review was given. " 
                         "RATING: The rating given by the reviewer (on a scale from 1 to 5). "
-                        "REVIEW_TEXT: Text content of the review. "
+                        "REVIEW_ORIGINAL_TEXT: Text content of the review. "
                         "REVIEW_URL: URL of the review. "
                         "REVIEW_ORIGIN: Source channel of the feedback (e.g., platform or app). "
                         "SENTIMENT: Sentiment analysis result for the feedback (e.g., positive, negative). "

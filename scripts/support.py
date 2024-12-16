@@ -24,9 +24,9 @@ def support(data, reviews_data):
     #filtered_review_data_detailed['RATING'] = filtered_review_data_detailed['RATING'].astype(int)
     data['CUSTOMER_SUCCESS_NOTES'] = data['CUSTOMER_SUCCESS_NOTES'].fillna('')
     df_to_edit = st.data_editor(
-        data[['SELECT', 'REVIEW_ID','REVIEWER_NAME', 'SENTIMENT', 'REVIEW_TEXT', 'RATING', 'ADDRESS',
+        data[['SELECT', 'REVIEW_ID','REVIEWER_NAME', 'SENTIMENT', 'REVIEW_ORIGINAL_TEXT', 'RATING', 'ADDRESS',
                                     'REVIEW_DATE', 'CUSTOMER_SUCCESS_NOTES', 'REVIEW_URL', 'STATUS', 'RESPONSE']].style.map(sentiment_color, subset=["SENTIMENT"]),
-        column_order=('SELECT', 'REVIEW_DATE', 'REVIEWER_NAME', 'RATING', 'REVIEW_TEXT', 'SENTIMENT', 'STATUS', 'ADDRESS', 'REVIEW_URL', 'RESPONSE', 'CUSTOMER_SUCCESS_NOTES'), 
+        column_order=('SELECT', 'REVIEW_DATE', 'REVIEWER_NAME', 'RATING', 'REVIEW_ORIGINAL_TEXT', 'SENTIMENT', 'STATUS', 'ADDRESS', 'REVIEW_URL', 'RESPONSE', 'CUSTOMER_SUCCESS_NOTES'), 
         column_config={
             'SELECT': 'Select',
             'REVIEW_DATE': 'Date',
@@ -36,7 +36,7 @@ def support(data, reviews_data):
                     'RATING': st.column_config.Column(
                         "Rating",
                         width="small"),
-                    'REVIEW_TEXT': st.column_config.Column(
+                    'REVIEW_ORIGINAL_TEXT': st.column_config.Column(
                         'Review',
                         width="large"),
                     'SENTIMENT': 'Sentiment',
@@ -60,7 +60,7 @@ def support(data, reviews_data):
                     'RESPONSE': 'Response',
                     'CUSTOMER_SUCCESS_NOTES': 'Customer Success Notes'
                     },
-        disabled=['SENTIMENT', 'REVIEW_TEXT', 'RATING', 'REVIEW_DATE', 'REVIEWER_NAME', 'ADDRESS', 'REVIEW_URL', 'RESPONSE'],
+        disabled=['SENTIMENT', 'REVIEW_ORIGINAL_TEXT', 'RATING', 'REVIEW_DATE', 'REVIEWER_NAME', 'ADDRESS', 'REVIEW_URL', 'RESPONSE'],
         use_container_width=True, 
         hide_index=True
     )
@@ -69,7 +69,7 @@ def support(data, reviews_data):
 
     if selected_sum == 1:
         selected_review = df_to_edit.loc[df_to_edit['SELECT'] == True].iloc[0]
-        review_text = selected_review['REVIEW_TEXT']
+        review_text = selected_review['REVIEW_ORIGINAL_TEXT']
         author_name = selected_review['REVIEWER_NAME']
         prompt = f"""
 Jsi manažer sociálních sítí Kooperativa. Vytvoř stručnou (3-5 vět), profesionální odpověď na recenzi níže. Kde je to vhodné, uznej konkrétní detaily z recenze, aby odpověď byla personalizovaná. Začni pozdravem, zaměř se na řešení zpětné vazby a nabídni následné kroky. Nezahrnuj žádný jiný text nebo komentáře. Vrať pouze odpověď.
