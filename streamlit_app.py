@@ -165,10 +165,9 @@ filtered_reviews = filtered_reviews[pd.to_datetime(filtered_reviews['REVIEW_DATE
 
 # Merge filtered reviews with locations data and sort by REVIEW_DATE
 filtered_locations_with_reviews = filtered_reviews.merge(locations_data, on='PLACE_ID', how='inner').sort_values('REVIEW_DATE', ascending=False)
-
 filtered_reviews_ids = filtered_locations_with_reviews['REVIEW_ID'].unique()
 attributes = attributes[attributes['REVIEW_ID'].isin(filtered_reviews_ids)]
-attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE'])['COUNT'].sum().reset_index()
+attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE']).size().reset_index(name='COUNT')
 attributes = attributes[attributes['COUNT'] > 1]
 
 if filtered_locations_with_reviews.empty:
