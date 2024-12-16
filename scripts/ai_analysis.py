@@ -111,7 +111,6 @@ def draw_network(G, pos, top_entities):
 
 @st.fragment
 def display_network_graph(attributes):
-    st.markdown("##### Entity-Attribute Relations")
     st.caption("_See up to top 10 mentioned entities and their attributes._")
     col1, col2 = st.columns([0.9, 0.1], vertical_alignment='center')
     num_entities = col2.number_input("Select the number of entities", min_value=1, max_value=10, value=5)
@@ -139,8 +138,11 @@ def ai_analysis(data, attributes):
 
     ## ENTITY-ATTRIBUTE RELATIONS
     st.divider()
-    if attributes:
+    st.markdown("##### Entity-Attribute Relations")
+    if attributes is not None and not attributes.empty:
         display_network_graph(attributes)
+    else: 
+        st.info()
 
 
     ## REVIEW DETAILS
