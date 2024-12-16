@@ -17,8 +17,8 @@ def overview(data):
     data_rating_sorted.columns = ['PLACE_ID', 'ADDRESS', 'PLACE_TOTAL_SCORE', 'PLACE_URL', 'RATING', 'COUNT']
 
     ## RATING DISTRIBUTION FOR TOP/BOTTOM X    
-    col1, col2, col3 = st.columns([0.42, 0.42, 0.16], vertical_alignment='center', gap='small')
-    with col3:
+    col1, col2 = st.columns([0.8, 0.2], vertical_alignment='center', gap='small')
+    with col2:
         st.caption("Select the number of locations")
         top_x = st.slider("Locations", min_value=1, max_value=20, value=5, label_visibility='collapsed')
         min_count = data_rating_sorted['COUNT'].min()
@@ -38,7 +38,7 @@ def overview(data):
             y=top_rating_distribution.index,
             orientation='h',
             labels={'value': 'Percentage', 'index': 'Location', 'rating': 'Rating', 'variable': 'Rating'},
-            title=f'Rating Distribution for Top {top_x} Locations',
+            title=f'Rating Distribution',
             color_discrete_map=rating_colors_index
         )
         fig_top.update_traces(hovertemplate='%{x:.2%}<extra></extra>')
@@ -51,32 +51,6 @@ def overview(data):
             yaxis={'tickvals': top_rating_distribution.index, 'ticktext': top_rating_distribution.index}
         )
         st.plotly_chart(fig_top, use_container_width=True)
-        
-    with col2:
-        bottom_locations = data_rating_sorted[data_rating_sorted['COUNT'] >= num_reviews].tail(top_x)
-        bottom_rating_distribution = bottom_locations['RATING'].apply(lambda ratings: pd.Series(ratings).value_counts(normalize=True).reindex([1, 2, 3, 4, 5], fill_value=0)).fillna(0)
-        bottom_rating_distribution.index = bottom_locations['ADDRESS']
-        bottom_rating_distribution = bottom_rating_distribution.sort_index(axis=1, ascending=False).iloc[::-1]
-
-        fig_bottom = px.bar(
-            bottom_rating_distribution,
-            x=bottom_rating_distribution.columns,
-            y=bottom_rating_distribution.index,
-            orientation='h',
-            labels={'value': 'Percentage', 'index': 'Location', 'rating': 'Rating', 'variable': 'Rating'},
-            title=f'Rating Distribution for Bottom {top_x} Locations',
-            color_discrete_map=rating_colors_index
-        )
-        fig_bottom.update_traces(hovertemplate='%{x:.2%}<extra></extra>')
-        fig_bottom.update_layout(
-            showlegend=False, 
-            xaxis_title=None, 
-            yaxis_title=None, 
-            xaxis_tickformat='.0%',
-            xaxis={'showticklabels': False},
-            yaxis={'tickvals': bottom_rating_distribution.index, 'ticktext': bottom_rating_distribution.index}
-        )
-        st.plotly_chart(fig_bottom, use_container_width=True)
 
     st.dataframe(
         data_rating_sorted[data_rating_sorted['COUNT'] >= num_reviews],
