@@ -56,7 +56,7 @@ attributes = pd.read_csv(st.secrets['attributes_path'])
 bot_data = pd.read_csv(st.secrets['bot_path'])
 
 
-pronouns_to_remove = ['i', 'you', 'she', 'he', 'it', 'we', 'they', 'I', 'You', 'She', 'He', 'It', 'We', 'They', 'Pete']
+pronouns_to_remove = ['já', 'ty', 'ona', 'on', 'ono', 'my', 'vy', 'oni', 'ony', 'ona', 'Vy']
 attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
@@ -167,10 +167,6 @@ filtered_reviews = filtered_reviews[pd.to_datetime(filtered_reviews['REVIEW_DATE
 
 # Merge filtered reviews with locations data and sort by REVIEW_DATE
 filtered_locations_with_reviews = filtered_reviews.merge(locations_data, on='PLACE_ID', how='inner').sort_values('REVIEW_DATE', ascending=False)
-filtered_reviews_ids = filtered_locations_with_reviews['REVIEW_ID'].unique()
-attributes = attributes[attributes['REVIEW_ID'].isin(filtered_reviews_ids)]
-attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE']).size().reset_index(name='COUNT')
-attributes = attributes[attributes['COUNT'] > 1]
 
 if filtered_locations_with_reviews.empty:
     st.info('No data available for the selected filters.', icon=':material/info:')
@@ -178,10 +174,6 @@ if filtered_locations_with_reviews.empty:
 
 st.sidebar.divider()
 st.sidebar.caption(f"**Data last updated on:** {data_collected_at}.")
-
-## TABS
-#if menu_id == 'About':
-#    about()
 
 if menu_id == 'Locations':    
     metrics(location_count_total, review_count_total, avg_rating_total, filtered_locations_with_reviews)

@@ -111,9 +111,12 @@ def draw_network(G, pos, top_entities):
 
 @st.fragment
 def display_network_graph(attributes):
-    st.caption("_See up to top 10 mentioned entities and their attributes._")
     col1, col2 = st.columns([0.9, 0.1], vertical_alignment='center')
-    num_entities = col2.number_input("Select the number of entities", min_value=1, max_value=10, value=5)
+    unique_entities_count = attributes['ENTITY'].nunique()
+    max_value = unique_entities_count if unique_entities_count < 10 else 10
+    col1.caption(f"_See up to top {max_value} mentioned entities and their attributes. The wider the line, the more times the attribute was mentioned._")
+    num_entities = col2.number_input("Select the number of entities", min_value=1, max_value=max_value, value=max_value if max_value < 5 else 5)
+    
     fig = create_network_graph(attributes, num_entities)
     col1.pyplot(fig, use_container_width=True)
 
@@ -139,11 +142,29 @@ def ai_analysis(data, attributes):
     ## ENTITY-ATTRIBUTE RELATIONS
     st.divider()
     st.markdown("##### Entity-Attribute Relations")
-    if attributes is not None and not attributes.empty:
-        display_network_graph(attributes)
-    else: 
-        st.info()
 
+    filtered_reviews_ids = data['REVIEW_ID'].unique()
+
+    attributes = attributes[attributes['REVIEW_ID'].isin(filtered_reviews_ids)]
+    attributes = attributes.dropna(subset=['ENTITY'])
+    attributes = attributes[attributes['ATTRIBUTE'].notna() & (attributes['ATTRIBUTE'] != '')]
+
+    attributes['ENTITY'] = attributes['ENTITY'].apply(lambda x: 'paní' if 'paní' in x and len(x.split()) > 1 else x)
+    attributes['ENTITY'] = attributes['ENTITY'].apply(lambda x: 'pobočka' if 'pobočka' in x and len(x.split()) > 1 else x)
+    attributes['ENTITY'] = attributes['ENTITY'].replace({'pristup': 'přístup', 'pani': 'paní'})
+    attributes.loc[(attributes['ENTITY'] == 'paní') & (attributes['ATTRIBUTE'] == 'pomocný'), 'ATTRIBUTE'] = 'pomocná'
+    attributes = attributes[~((attributes['ENTITY'] == 'pojišťovna') & (attributes['ATTRIBUTE'] == 'Dvůr Králové nad Labem'))]
+
+    attributes = attributes.groupby(['ENTITY', 'ATTRIBUTE']).size().reset_index(name='COUNT')
+    attributes = attributes[attributes['COUNT'] > 0]
+
+    attributes_sorted = attributes.sort_values(['ENTITY', 'COUNT'], ascending=[True, False])  # Sort by ENTITY and COUNT
+    attributes_limited = attributes_sorted.groupby('ENTITY').head(8)
+
+    if attributes_limited is not None and not attributes_limited.empty:
+        display_network_graph(attributes_limited)
+    else: 
+        st.info('No entity-attribute relations found for the selected filters.', icon=':material/info:')
 
     ## REVIEW DETAILS
     st.markdown("##### Review Details")
