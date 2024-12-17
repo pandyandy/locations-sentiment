@@ -61,6 +61,7 @@ attributes = attributes[~attributes['ENTITY'].isin(pronouns_to_remove)]
 
 reviews_data['RATING'] = reviews_data['RATING'].astype(int)
 locations_data['ADDRESS'] = locations_data['ADDRESS'].str.replace(", Česko", "", regex=False)
+locations_data['ADDRESS'] = locations_data['ADDRESS'].str.replace(", Slovensko", "", regex=False)
 
 ## LOGO
 st.sidebar.markdown(
