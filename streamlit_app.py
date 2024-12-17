@@ -76,7 +76,7 @@ st.sidebar.markdown(
 ## FILTERS
 # Category Selection
 if st.secrets.get('category_filter', 'True') == 'True':
-    category_options = sorted(locations_data['CATEGORY'].unique().tolist())
+    category_options = sorted(locations_data['CATEGORY'].dropna().unique().tolist())
     category = st.sidebar.multiselect('Select a category', category_options, placeholder='All')
     if len(category) > 0:
         selected_category = category
