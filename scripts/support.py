@@ -72,12 +72,12 @@ def support(data, reviews_data):
         review_text = selected_review['REVIEW_TEXT']
         author_name = selected_review['REVIEWER_NAME']
         prompt = f"""
-Jsi manažer sociálních sítí. Vytvoř stručnou (3-5 vět), profesionální odpověď na recenzi níže. Začni pozdravem, zaměř se na řešení zpětné vazby a nabídni následné kroky. Nezahrnuj žádný jiný text nebo komentáře. Vrať pouze odpověď.
+You are a social media manager for GymBeam. Write a brief (3-5 sentences), professional response to the review below. Start with a greeting, focus on addressing the feedback, and offer next steps. Do not include any other text or comments. Return only the response.
 
-Recenze:
+Review:
 {review_text}
 
-Autor: {author_name}
+Author: {author_name}
 """
         col8, col9 = st.columns(2, gap='medium', vertical_alignment='top')
         with col8:
@@ -118,14 +118,14 @@ Autor: {author_name}
                         st.session_state.instruction = instruction
                         with st.spinner(':robot_face: Regenerating response, please wait...'):
                             new_prompt = f"""
-Původní úkol:
+Original task:
 {prompt}
 
-Předchozí odpověď: {st.session_state['generated_responses'][review_text]}
+Previous response: {st.session_state['generated_responses'][review_text]}
 
-Další instrukce: {instruction}
+Additional instructions: {instruction}
 
-Prosím, aktualizuj odpověď.
+Please update the response.
 """
                             response = generate_response(new_prompt)
                             if response:
