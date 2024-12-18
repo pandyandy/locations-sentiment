@@ -15,7 +15,7 @@ client = OpenAI(api_key=st.secrets['OPENAI_API_KEY'])
 def generate_response(prompt):
     try:
         completion = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
