@@ -172,8 +172,8 @@ if filtered_locations_with_reviews.empty:
     st.info('No data available for the selected filters.', icon=':material/info:')
     st.stop()
 
-st.sidebar.divider()
-st.sidebar.caption(f"**Data last updated on:** {data_collected_at}.")
+#st.sidebar.divider()
+#st.sidebar.caption(f"**Data last updated on:** {data_collected_at}.")
 
 if menu_id == 'Locations':    
     metrics(location_count_total, review_count_total, avg_rating_total, filtered_locations_with_reviews)
